@@ -1,6 +1,6 @@
 <template name="InternationalPhoneMultiInput">
   <input
-    class="{{class}} intlMultiPhone-dialCode js-intlMultiPhone--dialCode"
+    class="{{class}} intlMultiPhone-dialCode js-intlMultiPhone-dialCode"
     autocomplete="off"
     name="dialCode"
     value="{{dialCode}}"
@@ -12,11 +12,11 @@
   {{/if}}
 
   <input
-    class="{{class}} intlMultiPhone-phoneNumber js-intlMultiPhone--phoneNumber"
+    class="{{class}} intlMultiPhone-phoneNumber js-intlMultiPhone-phoneNumber"
     autocomplete="off"
     name="phoneNumber"
     value="{{phoneNumber}}"
     maxlength="{{maxPhoneNumberLength}}"
-    placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{exampleCountryNumber}}{{/if}}"
-    type="tel" />
+    type="tel"
+    placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{exampleCountryNumber}}{{/if}}" />
 </template>

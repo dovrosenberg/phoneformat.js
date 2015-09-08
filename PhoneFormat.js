@@ -45,7 +45,7 @@ Phoneformat._getCountryForIp = function (callback) {
  */
 Phoneformat.countryForE164Number = function (phone) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
     var number = phoneUtil.parseAndKeepRawInput(phone);
     var output = new goog.string.StringBuffer();
@@ -66,7 +66,7 @@ Phoneformat.countryForE164Number = function (phone) {
  */
 Phoneformat.formatNumberForMobileDialing = function (country, phone) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
     var number = phoneUtil.parseAndKeepRawInput(phone, country);
     var output = new goog.string.StringBuffer();
@@ -84,7 +84,7 @@ Phoneformat.formatNumberForMobileDialing = function (country, phone) {
  */
 Phoneformat.isValidNumber = function (phone, country) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
     var number = phoneUtil.parseAndKeepRawInput(phone, country);
     return phoneUtil.isValidNumber(number);
@@ -100,7 +100,7 @@ Phoneformat.isValidNumber = function (phone, country) {
  */
 Phoneformat.formatE164 = function (country, phone) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
     var number = phoneUtil.parseAndKeepRawInput(phone, country);
     var PNF = i18n.phonenumbers.PhoneNumberFormat;
@@ -119,7 +119,7 @@ Phoneformat.formatE164 = function (country, phone) {
  */
 Phoneformat.formatInternational = function (country, phone) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var formatter = new i18n.phonenumbers.AsYouTypeFormatter(country);
     var output = new goog.string.StringBuffer();
 
@@ -141,7 +141,7 @@ Phoneformat.formatInternational = function (country, phone) {
  */
 Phoneformat.formatLocal = function (country, phone) {
   try {
-    var phone = Phoneformat.cleanPhone(phone);
+    phone = Phoneformat.cleanPhone(phone);
     var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
     var number = phoneUtil.parseAndKeepRawInput(phone, country);
 
@@ -192,15 +192,14 @@ Phoneformat.exampleMobileNumber = function (country) {
  * @param {String} phone
  */
 Phoneformat.cleanPhone = function (phone) {
-  phone = phone.replace(/[^\d\+]/g,'');
+  if (!phone || phone.length === 0) return '';
 
-  if (phone.substring(0, 1) == "+") {
-    phone = "+" + phone.replace(/[^\d]/g,'');
-  } else {
-    phone = phone.replace(/[^\d]/g,'');
-  }
+  var hasPlus = false;
+  if (phone.charAt(0) === "+") hasPlus = true;
 
-  return phone;
+  phone = phone.replace(/[^\d]/g,'');
+
+  return hasPlus ? '+' + phone : phone;
 };
 
 /*

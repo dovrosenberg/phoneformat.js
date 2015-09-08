@@ -1,8 +1,8 @@
 Package.describe({
   name: 'dispatch:phoneformat.js',
   summary: 'phoneformat.js packaged for meteor',
-  version: '1.4.1',
-  git: 'https://github.com/DispatchMe/phoneformat.js.git',
+  version: '1.5.0',
+  git: 'https://github.com/DispatchMe/phoneformat.js.git'
 });
 
 Package.onUse(function (api) {
@@ -20,10 +20,8 @@ Package.onUse(function (api) {
     'phoneformat.js',
     'country_code_map.js',
     'components/single-input/single_input.html',
-    'components/single-input/single_input.css',
     'components/single-input/single_input.js',
     'components/multi-input/multi_input.html',
-    'components/multi-input/multi_input.css',
     'components/multi-input/multi_input.js',
     'components/phone_input.js'
   ], 'web');

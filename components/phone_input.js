@@ -86,6 +86,8 @@ PhoneInput.prototype.getPhoneNumber = function () {
 PhoneInput.prototype.setPhoneNumber = function (phoneNumber) {
   var prevPhoneNumber = this.phoneNumber.get();
 
+  phoneNumber = Phoneformat.formatInternational(this.getCountryCode(), phoneNumber) || Phoneformat.cleanPhone(phoneNumber) || '';
+
   this.phoneNumber.set(phoneNumber);
 
   // Emit a change event if the phone number exists and is being changed.
@@ -95,7 +97,7 @@ PhoneInput.prototype.setPhoneNumber = function (phoneNumber) {
 };
 
 PhoneInput.prototype.getValue = function () {
-  var dialCode = this.getDialCode();
+  var dialCode = !this.hideDialCode ? this.getDialCode() : '';
   var phoneNumber = this.getPhoneNumber();
 
   // Remove all special characters except for '+'.
@@ -104,8 +106,7 @@ PhoneInput.prototype.getValue = function () {
 
 PhoneInput.prototype.setValue = function (newValue) {
   if (!newValue) return;
-
-  var newDialCode = Phoneformat.phoneNumberToDialCode(newValue);
+  var newDialCode = Phoneformat.phoneNumberToDialCode(newValue) || '';
   var newCountryCode = Phoneformat.dialCodeToCountryCode(newDialCode);
   this.setCountryCode(newCountryCode);
 
@@ -127,30 +128,24 @@ PhoneInput.prototype.maxLength = function () {
   return (dialCode + ' ' + formattedNumber).length;
 };
 
-Template.InternationalPhoneSingleInput.onCreated(function () {
-  var options = _.extend({}, this.data, { type: 'single' });
-  var input = PhoneInput(this.data.id, options);
+var _onCreated = function (data, view, options) {
+  options = _.extend({}, data, options);
+  var input = PhoneInput(data.id, options);
 
   // Append the template view to the input object
-  input.view = this.view;
+  input.view = view;
 
   // If store input is set to true, update the input value with the stored value.
   if (input.storeInput) {
-    var storedValue = localStorage.getItem('phoneformat.inputs.' + this.data.id);
+    var storedValue = localStorage.getItem('phoneformat.inputs.' + data.id);
     input.setValue(storedValue);
   }
+};
+
+Template.InternationalPhoneSingleInput.onCreated(function () {
+  _onCreated(this.data, this.view, { type: 'single' });
 });
 
 Template.InternationalPhoneMultiInput.onCreated(function () {
-  var options = _.extend({}, this.data, { type: 'multi' });
-  var input = PhoneInput(this.data.id, options);
-
-  // Append the template view to the input object
-  input.view = this.view;
-
-  // If store input is set to true, update the input value with the stored value.
-  if (input.storeInput) {
-    var storedValue = localStorage.getItem('phoneformat.inputs.' + this.data.id);
-    input.setValue(storedValue);
-  }
+  _onCreated(this.data, this.view, { type: 'multi' });
 });
