@@ -1,6 +1,4 @@
-.intlSinglePhone-dialCode,
-.intlSinglePhone-phoneNumber,
-.intlSinglePhone-separator {
+.intlSinglePhone-phoneNumber {
   display: inline-block;
   vertical-align: middle;
   border: none;

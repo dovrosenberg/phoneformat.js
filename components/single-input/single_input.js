@@ -1,16 +1,8 @@
 Template.InternationalPhoneSingleInput.helpers({
-  dialCode: function () {
-    var input = PhoneInput(this.id);
-    if (!input.getPhoneNumber()) return;
-
-    return input.getDialCode() + ' ';
-  },
   phoneNumber: function () {
     var input = PhoneInput(this.id);
-    var phoneNumber = input.getPhoneNumber();
-    var countryCode = input.getCountryCode();
 
-    return Phoneformat.formatInternational(countryCode, phoneNumber);
+    return (!input.hideDialCode ? input.getDialCode() + ' ' : '') + (input.getPhoneNumber() || '');
   },
   exampleCountryNumber: function () {
     var input = PhoneInput(this.id);
@@ -19,10 +11,7 @@ Template.InternationalPhoneSingleInput.helpers({
     var exampleNumber = Phoneformat.exampleMobileNumber(countryCode);
     var intlNumber = Phoneformat.formatInternational(countryCode, exampleNumber);
 
-    if (this.hideDialCode) return intlNumber.replace(/[0-9]/g, 'X');
-
-    var dialCode = input.getDialCode();
-    return dialCode + ' ' + intlNumber.replace(/[0-9]/g, 'X');
+    return (!input.hideDialCode ? input.getDialCode() + ' ' : '') + intlNumber.replace(/[0-9]/g, 'x');
   },
   maxPhoneNumberLength: function () {
     return PhoneInput(this.id).maxLength();
@@ -30,15 +19,23 @@ Template.InternationalPhoneSingleInput.helpers({
 });
 
 Template.InternationalPhoneSingleInput.events({
-  'input .js-intlSinglePhone--phoneNumber': function (event, template) {
+  'input .js-intlSinglePhone-phoneNumber': function (event, template) {
     var input = PhoneInput(template.data.id);
-    var currentValue = Phoneformat.cleanPhone(event.currentTarget.value);
+
+    var phoneNumber = event.currentTarget.value;
+
+    var countryCode = input.getCountryCode();
+    var formattedNumber = Phoneformat.formatInternational(countryCode, phoneNumber);
+    var unmaskedValue = phoneNumber.replace(/\(|\)|\-/g, '');
+    if (isNaN(unmaskedValue)) {
+      template.$('.js-intlSinglePhone-phoneNumber').val(formattedNumber);
+    }
 
     // Set the phone number on the phone input object.
     if (template.data.hideDialCode) {
-      input.setPhoneNumber(currentValue);
+      input.setPhoneNumber(formattedNumber);
     } else {
-      input.setValue(currentValue);
+      input.setValue(formattedNumber);
     }
   }
 });

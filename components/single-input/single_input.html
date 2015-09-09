@@ -1,10 +1,11 @@
 <template name="InternationalPhoneSingleInput">
-    <input
-      class="{{class}} intlSinglePhone-phoneNumber js-intlSinglePhone--phoneNumber"
-      autocomplete="off"
-      value="{{#unless hideDialCode}}{{dialCode}}{{/unless}}{{phoneNumber}}"
-      placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{exampleCountryNumber}}{{/if}}"
-      name="phoneNumber"
-      maxlength="{{maxPhoneNumberLength}}"
-      type="tel" />
+  <input
+    class="{{class}} intlSinglePhone-phoneNumber js-intlSinglePhone-phoneNumber"
+    autocomplete="off"
+    name="phoneNumber"
+    value="{{phoneNumber}}"
+    maxlength="{{maxPhoneNumberLength}}"
+    type="tel"
+    placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{exampleCountryNumber}}{{/if}}" />
+
 </template>
