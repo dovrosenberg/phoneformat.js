@@ -10,8 +10,6 @@ before_install:
   - "curl https://install.meteor.com | /bin/sh"
   - export PATH="$HOME/.meteor:$PATH"
   - "npm install -g velocity-cli"
-  - "npm install -g jshint"
 
 script:
-  - "jshint ."
   - "velocity test-package ./ —ci”
