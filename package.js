@@ -38,3 +38,20 @@ Package.onUse(function (api) {
 Cordova.depends({
   'org.apache.cordova.globalization': '0.3.4'
 });
+
+Package.onTest(function (api) {
+  api.use('sanjo:jasmine@0.18.0');
+
+  api.use([
+    'templating',
+    'dispatch:view-extensions',
+    'dispatch:timeout',
+    'dispatch:phoneformat.js'
+  ], 'web');
+
+  api.addFiles([
+    'tests/helpers.js',
+    'tests/prepare.html',
+    'tests/phoneformat.js'
+  ], 'web');
+});
