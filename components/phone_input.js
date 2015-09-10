@@ -149,3 +149,20 @@ Template.InternationalPhoneSingleInput.onCreated(function () {
 Template.InternationalPhoneMultiInput.onCreated(function () {
   _onCreated(this.data, this.view, { type: 'multi' });
 });
+
+var _onDestroyed = function (data) {
+  var id = data.id;
+  var input = PhoneInput(id);
+  if (!input.storeInput) {
+    input.setDialCode('');
+    input.setPhoneNumber('');
+  }
+};
+
+Template.InternationalPhoneMultiInput.onDestroyed(function () {
+  _onDestroyed(this.data);
+});
+
+Template.InternationalPhoneSingleInput.onDestroyed(function () {
+  _onDestroyed(this.data);
+});
