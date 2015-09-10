@@ -77,7 +77,7 @@ TestHelpers.inputValues = function (elements, values, callback) {
     Timeout.interval(function () {
         return !!$(element).length;
     }, function () {
-        typeInText(element, value);
+        TestHelpers.typeInText(element, value);
 
         TestHelpers.inputValues(elements, values, callback);
     });

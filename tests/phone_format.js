@@ -9,6 +9,7 @@ var $container, view, $input, phoneInput;
 describe('Phone Format', function () {
     beforeAll(function () {
         $container = $('#test-container');
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000.
     });
 
     afterEach(function () {
