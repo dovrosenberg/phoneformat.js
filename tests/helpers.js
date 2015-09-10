@@ -35,7 +35,7 @@ TestHelpers.expectElements = function(container, elements, callback) {
 };
 
 TestHelpers.waitForElement = function(selector, callback, options) {
-    options = _.extend({ container: $('body') }, options);
+    options = _.extend({ container: $('body'), timeout: 10000 }, options);
 
     Timeout.interval(function() {
         var elements = $(options.container).find(selector);
