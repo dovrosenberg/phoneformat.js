@@ -12,4 +12,4 @@ before_install:
   - "npm install -g velocity-cli"
 
 script:
-  - "velocity test-package ./ --ci”
+  - "velocity test-package ./ --ci"
