@@ -40,10 +40,7 @@ describe('Phone Format', function () {
 
             TestHelpers.typeInText($input, value);
 
-            TestHelpers.expectElements($(document.body), [$input], function () {
-                expect($input.val()).toEqual(formattedValue);
-                done();
-            });
+            TestHelpers.expectInputValues([$input], [formattedValue], done);
         });
 
         it('does not accept non phone number characters', function (done) {
@@ -52,10 +49,7 @@ describe('Phone Format', function () {
 
             TestHelpers.typeInText($input, value);
 
-            TestHelpers.expectElements($(document.body), [$input], function () {
-                expect($input.val()).toEqual('');
-                done();
-            });
+            TestHelpers.expectInputValues([$input], [''], done);
         });
 
         it('correctly sets phone number, dialcode and country code', function () {
@@ -92,10 +86,7 @@ describe('Phone Format', function () {
 
             TestHelpers.typeInText($input, value);
 
-            TestHelpers.expectElements($(document.body), [$input], function () {
-                expect($input.val()).toEqual(formattedValue);
-                done();
-            });
+            TestHelpers.expectInputValues([$input], [formattedValue], done);
         });
 
         it('does not accept non phone number characters', function (done) {
@@ -104,10 +95,7 @@ describe('Phone Format', function () {
 
             TestHelpers.typeInText($input, value);
 
-            TestHelpers.expectElements($(document.body), [$input], function () {
-                expect($input.val()).toEqual('');
-                done();
-            });
+            TestHelpers.expectInputValues([$input], [''], done);
         });
 
         it('correctly sets phone number', function () {

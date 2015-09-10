@@ -48,3 +48,18 @@ TestHelpers.waitForElement = function(selector, callback, options) {
         }
     }, options);
 };
+
+TestHelpers.expectInputValues = function (elements, values, callback) {
+    var element = elements.shift();
+    var value = values.shift();
+
+    if (!element && !value) return callback();
+
+    Timeout.interval(function () {
+        return !!$(element).val();
+    }, function () {
+        expect($(element).val()).toEqual(value);
+
+        TestHelpers.expectInputValues(elements, values, callback);
+    });
+};
