@@ -52,6 +52,6 @@ Package.onTest(function (api) {
   api.addFiles([
     'tests/helpers.js',
     'tests/prepare.html',
-    'tests/phoneformat.js'
+    'tests/phone_format.js'
   ], 'web');
 });
