@@ -35,7 +35,7 @@ TestHelpers.expectElements = function(container, elements, callback) {
 };
 
 TestHelpers.waitForElement = function(selector, callback, options) {
-    options = _.extend({ container: $('body'), timeout: 10000 }, options);
+    options = _.extend({ container: $('body') }, options);
 
     Timeout.interval(function() {
         var elements = $(options.container).find(selector);
@@ -46,7 +46,9 @@ TestHelpers.waitForElement = function(selector, callback, options) {
         } else {
             callback(null, { message: 'Element "' + selector + '" is ready' });
         }
-    }, options);
+    }, {
+        timeout: 30000
+    });
 };
 
 TestHelpers.expectInputValues = function (elements, values, callback) {
@@ -61,5 +63,7 @@ TestHelpers.expectInputValues = function (elements, values, callback) {
         expect($(element).val()).toEqual(value);
 
         TestHelpers.expectInputValues(elements, values, callback);
+    }, {
+        timeout: 30000
     });
 };
