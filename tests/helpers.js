@@ -67,3 +67,18 @@ TestHelpers.expectInputValues = function (elements, values, callback) {
         timeout: 30000
     });
 };
+
+TestHelpers.inputValues = function (elements, values, callback) {
+    var element = elements.shift();
+    var value = values.shift();
+
+    if (!element && !value) return callback();
+
+    Timeout.interval(function () {
+        return !!$(element).length;
+    }, function () {
+        typeInText(element, value);
+
+        TestHelpers.inputValues(elements, values, callback);
+    });
+};

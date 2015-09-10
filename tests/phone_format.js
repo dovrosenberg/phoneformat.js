@@ -38,24 +38,25 @@ describe('Phone Format', function () {
             var value = '5555555555';
             var formattedValue = '(555) 555-5555';
 
-            TestHelpers.typeInText($input, value);
-
-            setTimeout(function (){
-                expect($input.val()).toEqual(formattedValue);
-                done();
-            }, 5000);
+            TestHelpers.inputValues([$input], [value], function () {
+                setTimeout(function (){
+                    expect($input.val()).toEqual(formattedValue);
+                    done();
+                }, 5000);
+            });
         });
 
         it('does not accept non phone number characters', function (done) {
-            TestHelpers.typeInText($input, '');
             var value = 'a!@#$%^&*()_+';
 
-            TestHelpers.typeInText($input, value);
-
-            setTimeout(function (){
-                expect($input.val()).toEqual('');
-                done();
-            }, 5000)
+            TestHelpers.inputValues([$input], [' '], function () {
+                TestHelpers.inputValues([$input], [value], function () {
+                    setTimeout(function () {
+                        expect($input.val()).toEqual('');
+                        done();
+                    }, 5000);
+                });
+            });
 
         });
 
@@ -91,24 +92,24 @@ describe('Phone Format', function () {
             var value = '5555555555';
             var formattedValue = '(555) 555-5555';
 
-            TestHelpers.typeInText($input, value);
-
-            setTimeout(function (){
-                expect($input.val()).toEqual(formattedValue);
-                done();
-            }, 5000);
+            TestHelpers.inputValues([$input], [value], function () {
+                setTimeout(function (){
+                    expect($input.val()).toEqual(formattedValue);
+                    done();
+                }, 5000);
+            });
         });
 
         it('does not accept non phone number characters', function (done) {
-            TestHelpers.typeInText($input, '');
             var value = 'a!@#$%^&*()_+';
-
-            TestHelpers.typeInText($input, value);
-
-            setTimeout(function (){
-                expect($input.val()).toEqual('');
-                done();
-            }, 5000)
+            TestHelpers.inputValues([$input], [' '], function () {
+                TestHelpers.inputValues([$input], [value], function () {
+                    setTimeout(function () {
+                        expect($input.val()).toEqual('');
+                        done();
+                    }, 5000);
+                });
+            });
         });
 
         it('correctly sets phone number', function () {
