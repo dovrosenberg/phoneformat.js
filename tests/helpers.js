@@ -1,8 +1,7 @@
 TestHelpers = {};
 
 TestHelpers.typeInText = function(el, text) {
-    var $el = el instanceof jQuery ? el : $(el);
-
+    var $el = $(el);
     var triggerKeyEvent = function($el, name, ch) {
         var e = $.Event(name, { keyCode: ch, which: ch });
         $el.trigger(e);
