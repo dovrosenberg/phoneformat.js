@@ -25,7 +25,7 @@ describe('Phone Format', function () {
 
         beforeEach(function (done) {
             view = Template.InternationalPhoneSingleInput.constructView().setData(data).attach($container[0]);
-            phoneInput = PhoneInput(data.id);
+            phoneInput = PhoneInput(data.id, {countryCode: 'US'});
 
             TestHelpers.waitForElement(elements.singleInput, function () {
                 $input = $(elements.singleInput);
@@ -75,7 +75,7 @@ describe('Phone Format', function () {
             view = Template.InternationalPhoneMultiInput.constructView().setData(data).attach($container[0]);
 
             $input = $(elements.multiInput);
-            phoneInput = PhoneInput(data.id);
+            phoneInput = PhoneInput(data.id, { countryCode: 'US' });
         });
 
         it('is initialized', function () {
