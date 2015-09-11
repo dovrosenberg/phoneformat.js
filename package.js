@@ -44,6 +44,7 @@ Package.onTest(function (api) {
 
   api.use([
     'templating',
+    'velocity:core@0.9.3',
     'dispatch:view-extensions',
     'dispatch:timeout',
     'dispatch:phoneformat.js'

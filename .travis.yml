@@ -10,6 +10,7 @@ before_install:
   - "curl https://install.meteor.com | /bin/sh"
   - export PATH="$HOME/.meteor:$PATH"
   - "npm install -g velocity-cli"
+  - "npm list -g"
 
 script:
   - "velocity test-package ./ --ci"
