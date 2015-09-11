@@ -23,11 +23,14 @@ describe('Phone Format', function () {
             hideDialCode: true
         };
 
-        beforeEach(function () {
+        beforeEach(function (done) {
             view = Template.InternationalPhoneSingleInput.constructView().setData(data).attach($container[0]);
-
-            $input = $(elements.singleInput);
             phoneInput = PhoneInput(data.id);
+
+            TestHelpers.waitForElement(elements.singleInput, function () {
+                $input = $(elements.singleInput);
+                done();
+            });
         });
 
         it('is initialized', function () {
@@ -39,26 +42,17 @@ describe('Phone Format', function () {
             var value = '5555555555';
             var formattedValue = '(555) 555-5555';
 
-            TestHelpers.inputValues([$input], [value], function () {
-                setTimeout(function (){
-                    expect($input.val()).toEqual(formattedValue);
-                    done();
-                }, 5000);
+            TestHelpers.inputValues([elements.singleInput], [value], function () {
+                TestHelpers.expectInputValues([elements.singleInput], [formattedValue], done);
             });
         });
 
-        it('does not accept non phone number characters', function (done) {
+        it('does not accept non phone number characters', function () {
             var value = 'a!@#$%^&*()_+';
 
-            TestHelpers.inputValues([$input], [' '], function () {
-                TestHelpers.inputValues([$input], [value], function () {
-                    setTimeout(function () {
-                        expect($input.val()).toEqual('');
-                        done();
-                    }, 5000);
-                });
-            });
+            TestHelpers.typeInText(elements.singleInput, value);
 
+            expect($(elements.singleInput).val()).toEqual('');
         });
 
         it('correctly sets phone number, dialcode and country code', function () {
@@ -93,24 +87,17 @@ describe('Phone Format', function () {
             var value = '5555555555';
             var formattedValue = '(555) 555-5555';
 
-            TestHelpers.inputValues([$input], [value], function () {
-                setTimeout(function (){
-                    expect($input.val()).toEqual(formattedValue);
-                    done();
-                }, 5000);
+            TestHelpers.inputValues([elements.multiInput], [value], function () {
+                TestHelpers.expectInputValues([elements.multiInput], [formattedValue], done);
             });
         });
 
-        it('does not accept non phone number characters', function (done) {
+        it('does not accept non phone number characters', function () {
             var value = 'a!@#$%^&*()_+';
-            TestHelpers.inputValues([$input], [' '], function () {
-                TestHelpers.inputValues([$input], [value], function () {
-                    setTimeout(function () {
-                        expect($input.val()).toEqual('');
-                        done();
-                    }, 5000);
-                });
-            });
+
+            TestHelpers.typeInText(elements.multiInput, value);
+
+            expect($(elements.multiInput).val()).toEqual('');
         });
 
         it('correctly sets phone number', function () {

@@ -63,8 +63,6 @@ TestHelpers.expectInputValues = function (elements, values, callback) {
         expect($(element).val()).toEqual(value);
 
         TestHelpers.expectInputValues(elements, values, callback);
-    }, {
-        timeout: 30000
     });
 };
 
