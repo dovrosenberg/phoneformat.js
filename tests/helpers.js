@@ -58,7 +58,8 @@ TestHelpers.expectInputValues = function (elements, values, callback) {
     if (!element && !value) return callback();
 
     Timeout.interval(function () {
-        return !!$(element).val();
+        var $el = $(element);
+        return $el && $el.val() === value;
     }, function () {
         expect($(element).val()).toEqual(value);
 
