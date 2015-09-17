@@ -153,16 +153,20 @@ Template.InternationalPhoneMultiInput.onCreated(function () {
 var _onDestroyed = function (data) {
   var id = data.id;
   var input = PhoneInput(id);
+
   if (!input.storeInput) {
-    input.setDialCode('');
-    input.setPhoneNumber('');
+    Phoneformat._getCountryForIp(function (countryCode) {
+      input.setCountryCode(countryCode);
+      input.setPhoneNumber('');
+    });
   }
 };
+
+Template.InternationalPhoneSingleInput.onDestroyed(function () {
+  _onDestroyed(this.data);
+});
 
 Template.InternationalPhoneMultiInput.onDestroyed(function () {
   _onDestroyed(this.data);
 });
 
-Template.InternationalPhoneSingleInput.onDestroyed(function () {
-  _onDestroyed(this.data);
-});
