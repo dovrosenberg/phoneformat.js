@@ -1,13 +1,13 @@
 Package.describe({
   name: 'dispatch:phoneformat.js',
   summary: 'phoneformat.js packaged for meteor',
-  version: '1.5.3',
+  version: '1.5.4',
   git: 'https://github.com/DispatchMe/phoneformat.js.git'
 });
 
 Package.onUse(function (api) {
   api.versionsFrom('1.0');
-  
+
   api.use([
     // core
     'underscore',
