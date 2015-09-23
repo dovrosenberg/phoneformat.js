@@ -39,5 +39,5 @@ Package.onUse(function (api) {
 });
 
 Cordova.depends({
-  'org.apache.cordova.globalization': '0.3.4'
+  'cordova-plugin-globalization': '1.0.1'
 });
