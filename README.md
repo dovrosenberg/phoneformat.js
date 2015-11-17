@@ -58,5 +58,9 @@ PhoneInput('example').on('change', function (change) {});
 
 <br>
 
+##License
+
+MIT © [Dispatch](https://github.com/dispatchme)
+
 ##Credits
 This repo was originally forked from [albeebe/phoneformat.js](https://github.com/albeebe/phoneformat.js).
